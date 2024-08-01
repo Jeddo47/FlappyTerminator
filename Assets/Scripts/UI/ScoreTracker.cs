@@ -16,11 +16,22 @@ public class ScoreTracker : MonoBehaviour
     {
         EnemyReleaseTracker.EnemyKilled -= AddScore;
     }
+    public void ResetScore()
+    {
+        _score = 0;
 
-    private void AddScore() 
+        ShowScore();
+    }
+
+    private void AddScore()
     {
         _score++;
-        
+
+        ShowScore();
+    }
+
+    private void ShowScore() 
+    {
         _scoreDisplay.text = _score.ToString();
     }
 }

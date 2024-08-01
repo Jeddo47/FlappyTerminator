@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.UI;
 
 public abstract class GenericSpawner<Type> : MonoBehaviour where Type : MonoBehaviour
 {
-    [SerializeField] private Type _prefabType;
+    [SerializeField] private Type _objectType;
     [SerializeField] private int _poolCapacity;
     [SerializeField] private int _poolMaxSize;
 
@@ -13,9 +12,9 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : MonoBeha
     private void Awake()
     {
         _pool = new ObjectPool<Type>(
-            createFunc: () => Instantiate(_prefabType),
+            createFunc: () => Instantiate(_objectType),
             actionOnGet: OnGet,
-            actionOnRelease: (prefabType) => prefabType.gameObject.SetActive(false),
+            actionOnRelease: (objectType) => objectType.gameObject.SetActive(false),
             actionOnDestroy: OnTypeDestroy,
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
@@ -24,14 +23,14 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : MonoBeha
 
     public void ResetPool()
     {        
-        _pool.Dispose();
+        _pool.Clear();
     }
 
-    protected abstract void OnGet(Type prefabType);    
+    protected abstract void OnGet(Type objectType);    
 
-    protected virtual void ReleaseObject(Type prefabType) 
+    protected virtual void ReleaseObject(Type objectType) 
     {
-        _pool.Release(prefabType);    
+        _pool.Release(objectType);    
     }
 
     protected virtual void GetObject() 
@@ -39,8 +38,8 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : MonoBeha
         _pool.Get();    
     }
 
-    private void OnTypeDestroy(Type prefabType)
+    private void OnTypeDestroy(Type objectType)
     {
-        Destroy(prefabType);
+        Destroy(objectType.gameObject);
     }
 }

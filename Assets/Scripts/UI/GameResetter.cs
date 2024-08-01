@@ -8,6 +8,8 @@ public class GameResetter : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private EnemyProjectileSpawner _enemyProjectileSpawner;
     [SerializeField] private PlayerProjectileSpawner _playerProjectileSpawner;
+    [SerializeField] private ScoreTracker _scoreTracker;
+    [SerializeField] private DifficultyIncreaser _difficultyIncreaser;
 
     private Vector3 _playerStartPosition;
     private Quaternion _playerStartRotation;
@@ -41,15 +43,49 @@ public class GameResetter : MonoBehaviour
 
     private void ResetGame()
     {
-        _mainMenu.gameObject.SetActive(true);
+        Time.timeScale = 0;
+
+        _mainMenu.gameObject.SetActive(true);                
                 
+        ResetSpawners();
+        ResetObjectsOnScene();
+        ResetPlayer();
+        _scoreTracker.ResetScore();
+        _difficultyIncreaser.ResetDifficulty();
+    }
+
+    private void ResetSpawners() 
+    {
         _enemySpawner.ResetPool();
         _enemyProjectileSpawner.ResetPool();
         _playerProjectileSpawner.ResetPool();
+    }
 
+    private void ResetObjectsOnScene() 
+    {
+        PlayerProjectile[] playerProjectilesOnScene = GameObject.FindObjectsOfType<PlayerProjectile>();
+        EnemyProjectile[] enemyProjectilesOnScene = GameObject.FindObjectsOfType<EnemyProjectile>();
+        EnemyMover[] enemiesOnScene = GameObject.FindObjectsOfType<EnemyMover>();
+
+        foreach (var playerProjectile in playerProjectilesOnScene) 
+        {
+            Destroy(playerProjectile.gameObject);                    
+        }
+
+        foreach (var enemyProjectile in enemyProjectilesOnScene) 
+        {
+            Destroy(enemyProjectile.gameObject);                    
+        }
+
+        foreach (var enemy in enemiesOnScene) 
+        {
+            Destroy(enemy.gameObject);                    
+        }
+    }
+
+    private void ResetPlayer() 
+    {
         _playerDamageTaker.transform.position = _playerStartPosition;
         _playerDamageTaker.transform.rotation = _playerStartRotation;
-
-        Time.timeScale = 0;
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : GenericSpawner<EnemyReleaseTracker>
@@ -9,8 +8,6 @@ public class EnemySpawner : GenericSpawner<EnemyReleaseTracker>
     [SerializeField] private float _minSpawnPointY;
     [SerializeField] private float _maxSpawnPointY;
     [SerializeField] private float _spawnDelay;
-    [SerializeField] private float _spawnDelaySubtrahend;
-    [SerializeField] private float _minSpawnDelay;
     [SerializeField] private DifficultyIncreaser _difficultyIncreaser;
 
     public event Action<EnemyReleaseTracker> EnemySpawned;
@@ -23,12 +20,12 @@ public class EnemySpawner : GenericSpawner<EnemyReleaseTracker>
 
     private void OnEnable()
     {
-        _difficultyIncreaser.DifficultyIncreased += IncreaseSpawnRate;
+        _difficultyIncreaser.DifficultyChanged += ChangeSpawnRate;
     }
 
     private void OnDisable()
     {
-        _difficultyIncreaser.DifficultyIncreased -= IncreaseSpawnRate;
+        _difficultyIncreaser.DifficultyChanged -= ChangeSpawnRate;
     }
 
     protected override void OnGet(EnemyReleaseTracker enemy)
@@ -59,11 +56,8 @@ public class EnemySpawner : GenericSpawner<EnemyReleaseTracker>
         }
     }
 
-    private void IncreaseSpawnRate()
+    private void ChangeSpawnRate(float _delay)
     {
-        if (_spawnDelay > _minSpawnDelay) 
-        {
-            _spawnDelay -= _spawnDelaySubtrahend;
-        }        
+        _spawnDelay = _delay;       
     }
 }

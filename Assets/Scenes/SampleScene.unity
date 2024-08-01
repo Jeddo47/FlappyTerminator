@@ -2286,6 +2286,7 @@ MonoBehaviour:
   _enemySpawner: {fileID: 190327231}
   _enemyProjectileSpawner: {fileID: 190327234}
   _playerProjectileSpawner: {fileID: 190327233}
+  _scoreTracker: {fileID: 78220051}
 --- !u!4 &78220054
 Transform:
   m_ObjectHideFlags: 0
@@ -2653,7 +2654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e8e636dfdcdd8141b5454486c7b809a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabType: {fileID: -6670113349787036119, guid: e33dc894280370945953d34055872dfa, type: 3}
+  _objectType: {fileID: -6670113349787036119, guid: e33dc894280370945953d34055872dfa, type: 3}
   _poolCapacity: 10
   _poolMaxSize: 10
   _spawnPointX: 22
@@ -2690,7 +2691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a2d5164db5458d4eb8e1319f7dc1abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabType: {fileID: 1397722688886219437, guid: 0923148dfbc7c8349a9df27be899ecdb, type: 3}
+  _objectType: {fileID: 1397722688886219437, guid: 0923148dfbc7c8349a9df27be899ecdb, type: 3}
   _poolCapacity: 20
   _poolMaxSize: 20
   _playerDamageDealer: {fileID: 148408968}
@@ -2706,7 +2707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 039fcff39e7c1cf47a41c19cce48ea48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabType: {fileID: 6329830205200260276, guid: 469e3af20554ee94591bae1de3e6df96, type: 3}
+  _objectType: {fileID: 6329830205200260276, guid: 469e3af20554ee94591bae1de3e6df96, type: 3}
   _poolCapacity: 20
   _poolMaxSize: 20
   _enemySpawner: {fileID: 190327231}
