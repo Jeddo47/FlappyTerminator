@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class ScoreTracker : MonoBehaviour
     [SerializeField] private TMP_Text _scoreDisplay;
 
     private float _score;
+
+    public float Score => _score;
 
     private void OnEnable()
     {

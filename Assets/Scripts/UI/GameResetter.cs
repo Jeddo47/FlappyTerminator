@@ -10,6 +10,7 @@ public class GameResetter : MonoBehaviour
     [SerializeField] private PlayerProjectileSpawner _playerProjectileSpawner;
     [SerializeField] private ScoreTracker _scoreTracker;
     [SerializeField] private DifficultyIncreaser _difficultyIncreaser;
+    [SerializeField] private AudioSource _musicSource;
 
     private Vector3 _playerStartPosition;
     private Quaternion _playerStartRotation;
@@ -39,13 +40,17 @@ public class GameResetter : MonoBehaviour
         _mainMenu.gameObject.SetActive(false);
 
         Time.timeScale = 1;
+
+        _musicSource.Play();
     }
 
     private void ResetGame()
     {
         Time.timeScale = 0;
 
-        _mainMenu.gameObject.SetActive(true);                
+        _mainMenu.gameObject.SetActive(true); 
+        
+        _musicSource.Stop();
                 
         ResetSpawners();
         ResetObjectsOnScene();

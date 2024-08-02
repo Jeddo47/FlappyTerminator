@@ -26,5 +26,5 @@ public class PlayerProjectileSpawner : GenericSpawner<PlayerProjectileReleaseTra
         base.ReleaseObject(projectile);
         
         projectile.ReleaseStateReached -= ReleaseObject;
-    }
+    }    
 }

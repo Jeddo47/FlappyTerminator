@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyProjectileSpawner : GenericSpawner<EnemyProjectileReleaseTracker>
@@ -5,6 +6,8 @@ public class EnemyProjectileSpawner : GenericSpawner<EnemyProjectileReleaseTrack
     [SerializeField] private EnemySpawner _enemySpawner;
 
     private EnemyDamageDealer _currentEnemy;
+
+    public event Action ProjectileSpawned;
 
     private void OnEnable()
     {
@@ -23,6 +26,8 @@ public class EnemyProjectileSpawner : GenericSpawner<EnemyProjectileReleaseTrack
         projectile.transform.position = _currentEnemy.transform.position;
         projectile.gameObject.SetActive(true);
         projectile.ReleaseStateReached += ReleaseObject;
+
+        ProjectileSpawned?.Invoke();
     }
 
     protected override void ReleaseObject(EnemyProjectileReleaseTracker projectile)
